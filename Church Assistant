@@ -1,0 +1,297 @@
+#Thoughts moving forward:
+#Create a .exe download file that downloads EVERYTHING needed (PS7, OBS-Powershell, The program) 
+#AND an option is to set the filepaths in this, where the input is saved into a .txt file that this program can reference when it is ran.
+
+#OTHER OPTIONS:
+#Creating this but a VLC Based program to aviod OBS
+
+
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+
+#Example Filepath: "C:\Users\chand\Videos\OBS_V\LCG_Hymnal\TV\1.mp4"
+
+
+#*** IF YOU NEED TO CHANGE THE FILEPATHs:  REPLACE BETWEEN QUOTATION MARKS BELOW ***
+
+$File_Path_V1 = "\\Mac\Home\Downloads\" #THIS IS FOR HYMNS
+$File_Path_V2 = "C:\Users\chand\Desktop\" #THIS IS FOR SERMONETTE/SERMON FOLDERS
+
+
+$form = New-Object System.Windows.Forms.Form 
+$form.Text = "Song Loader"
+$form.Size = New-Object System.Drawing.Size(600, 800) 
+$form.StartPosition = "CenterScreen"
+#$form.Font = New-Object System.Drawing.Font("Arial", 12)  # Set the desired font and size for the form
+#+50 to the text box
+#+60 to the label
+
+
+$label1 = New-Object System.Windows.Forms.Label
+$label1.Location = New-Object System.Drawing.Point(80, 20) 
+$label1.Size = New-Object System.Drawing.Size(400, 45) 
+$label1.Text = "Enter first hymn:"
+$label1.Font = New-Object System.Drawing.Font("Arial", 15)  # Set the desired font and size for the label
+$form.Controls.Add($label1) 
+
+$textbox1 = New-Object System.Windows.Forms.TextBox 
+$textbox1.Location = New-Object System.Drawing.Point(80, 70) 
+$textbox1.Size = New-Object System.Drawing.Size(400, 40)  # Increase the height of the text box
+$textbox1.Font = New-Object System.Drawing.Font("Arial", 25)  # Set the desired font and size for the text box
+$form.Controls.Add($textbox1) 
+
+$label2 = New-Object System.Windows.Forms.Label
+$label2.Location = New-Object System.Drawing.Point(80, 130) 
+$label2.Size = New-Object System.Drawing.Size(400, 45) 
+$label2.Text = "Enter second hymn:"
+$label2.Font = New-Object System.Drawing.Font("Arial", 15)  # Set the desired font and size for the label
+$form.Controls.Add($label2) 
+
+$textbox2 = New-Object System.Windows.Forms.TextBox 
+$textbox2.Location = New-Object System.Drawing.Point(80, 180) 
+$textbox2.Size = New-Object System.Drawing.Size(400, 40)  # Increase the height of the text box
+$textbox2.Font = New-Object System.Drawing.Font("Arial", 25)  # Set the desired font and size for the text box
+$form.Controls.Add($textbox2) 
+
+$label3 = New-Object System.Windows.Forms.Label
+$label3.Location = New-Object System.Drawing.Point(80, 240) 
+$label3.Size = New-Object System.Drawing.Size(400, 45) 
+$label3.Text = "Enter third hymn:"
+$label3.Font = New-Object System.Drawing.Font("Arial", 15)  # Set the desired font and size for the label
+$form.Controls.Add($label3) 
+
+$textbox3 = New-Object System.Windows.Forms.TextBox 
+$textbox3.Location = New-Object System.Drawing.Point(80, 290) 
+$textbox3.Size = New-Object System.Drawing.Size(400, 40)  # Increase the height of the text box
+$textbox3.Font = New-Object System.Drawing.Font("Arial", 25)  # Set the desired font and size for the text box
+$form.Controls.Add($textbox3) 
+
+$label4 = New-Object System.Windows.Forms.Label
+$label4.Location = New-Object System.Drawing.Point(80, 350) 
+$label4.Size = New-Object System.Drawing.Size(400, 45) 
+$label4.Text = "Enter fourth hymn:"
+$label4.Font = New-Object System.Drawing.Font("Arial", 15)  # Set the desired font and size for the label
+$form.Controls.Add($label4) 
+
+$textbox4 = New-Object System.Windows.Forms.TextBox 
+$textbox4.Location = New-Object System.Drawing.Point(80, 400) 
+$textbox4.Size = New-Object System.Drawing.Size(400, 40)  # Increase the height of the text box
+$textbox4.Font = New-Object System.Drawing.Font("Arial", 25)  # Set the desired font and size for the text box
+$form.Controls.Add($textbox4) 
+
+$label5 = New-Object System.Windows.Forms.Label
+$label5.Location = New-Object System.Drawing.Point(80, 460) 
+$label5.Size = New-Object System.Drawing.Size(400, 45) 
+$label5.Text = "Enter fifth hymn:"
+$label5.Font = New-Object System.Drawing.Font("Arial", 15)  # Set the desired font and size for the label
+$form.Controls.Add($label5) 
+
+$textbox5 = New-Object System.Windows.Forms.TextBox 
+$textbox5.Location = New-Object System.Drawing.Point(80, 510) 
+$textbox5.Size = New-Object System.Drawing.Size(400, 40)  # Increase the height of the text box
+$textbox5.Font = New-Object System.Drawing.Font("Arial", 25)  # Set the desired font and size for the text box
+$form.Controls.Add($textbox5) 
+
+$button1 = New-Object System.Windows.Forms.Button
+$button1.Location = New-Object System.Drawing.Point(150,600)
+$button1.Size = New-Object System.Drawing.Size(250,100)
+$button1.Text = "Save"
+$button1.DialogResult = [System.Windows.Forms.DialogResult]::OK
+$button1.Font = New-Object System.Drawing.Font("Arial", 20)  # Set the desired font and size for the text box
+$form.AcceptButton = $button1
+$form.Controls.Add($button1)
+
+
+$button1.Add_Click({
+
+if(Test-Path ($File_Path_V1 + $textbox1.Text + '.mp4')) {
+    
+    $1check=$true
+
+} else {
+
+    $1check=$false
+
+}
+
+if(Test-Path ($File_Path_V1 + $textbox2.Text + '.mp4')) {
+    
+    $2check=$true
+
+} else {
+
+    $2check=$false
+
+}
+
+if(Test-Path ($File_Path_V1 + $textbox3.Text + '.mp4')) {
+    
+    $3check=$true
+
+} else {
+
+    $3check=$false
+
+}
+
+if(Test-Path ($File_Path_V1 + $textbox4.Text + '.mp4')) {
+    
+    $4check=$true
+
+} else {
+
+    $4check=$false
+
+}
+
+if(Test-Path ($File_Path_V1 + $textbox5.Text + '.mp4')) {
+    
+    $5check=$true
+
+} else {
+
+    $5check=$false
+
+}
+
+
+if($1check -and $2check -and $3check -and $4check -and $5check){
+
+    $allinputstrue=$true
+    Write-Host "True"
+    
+} else {
+
+    $allinputstrue=$false
+    Write-Host "False"
+    
+    
+    
+    $form2 = New-Object System.Windows.Forms.Form 
+    $form2.Text = "Song Loader"
+    $form2.Size = New-Object System.Drawing.Size(1000, 400) 
+    $form2.StartPosition = "CenterScreen"
+    
+
+    $label1 = New-Object System.Windows.Forms.Label
+    $label1.Location = New-Object System.Drawing.Point(00, 00) 
+    $label1.Size = New-Object System.Drawing.Size(1000, 325) 
+    $label1.Text = "One or more of your hymns were incorrect, please try again"
+    $label1.Font = New-Object System.Drawing.Font("Arial", 30)  # Set the desired font and size for the label
+    $label1.TextAlign = [System.Drawing.ContentAlignment]::MiddleCenter
+    $form2.Controls.Add($label1)
+
+    $form2.ShowDialog() | Out-Null
+
+}
+
+
+if ($allinputstrue -eq $false) {
+        $form.DialogResult = [System.Windows.Forms.DialogResult]::None
+    }
+
+
+})
+
+
+
+
+do {
+    $form.ShowDialog() | Out-Null
+} until ($allinputstrue)
+
+
+
+
+
+
+Install-Module obs-powershell
+Import-Module obs-powershell -PassThru -Force
+
+
+# Connect to OBS Studio
+Connect-OBS -WebSocketUri "ws://127.0.0.1:4455" -WebSocketToken "iforgot"
+
+
+
+
+
+Set-OBSInputSettings -InputName "song1File" -InputSettings @{
+    
+    local_file=($File_Path_V1 + $textbox1 + '.mp4')
+}
+
+Set-OBSInputSettings -InputName "song2File" -InputSettings @{
+    
+    local_file=($File_Path_V1 + $textbox2 + '.mp4')
+}
+
+Set-OBSInputSettings -InputName "song3File" -InputSettings @{
+    
+    local_file=($File_Path_V1 + $textbox3 + '.mp4')
+}
+
+Set-OBSInputSettings -InputName "song4File" -InputSettings @{
+    
+    local_file=($File_Path_V1 + $textbox4 + '.mp4')
+}
+
+Set-OBSInputSettings -InputName "song5File" -InputSettings @{
+    
+    local_file=($File_Path_V1 + $textbox5 + '.mp4')
+}
+
+
+#Sermonette Loader
+$folderPath = ($File_Path_V2 + "Sermonettes")
+
+$mostRecentFile = Get-ChildItem -Path $folderPath | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+
+if ($mostRecentFile) {
+    $filePath = $mostRecentFile.FullName
+    
+    $filePath
+    Set-OBSInputSettings -InputName "sermonetteFile" -InputSettings @{
+
+        local_file=($filePath)
+    }
+
+} else {
+    Write-Host "No sermonettes found in the folder."
+}
+
+
+
+
+
+#Sermon Loader
+$folderPath = ($File_Path_V2 + "Sermons")
+
+$mostRecentFile = Get-ChildItem -Path $folderPath | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+
+if ($mostRecentFile) {
+    $filePath = $mostRecentFile.FullName
+    
+    $filePath
+    Set-OBSInputSettings -InputName "sermonFile" -InputSettings @{
+
+        local_file=($filePath)
+    }
+
+} else {
+    Write-Host "No files found in the folder."
+}
+
+
+
+Open-OBSVideoMixProjector -VideoMixType OBS_WEBSOCKET_VIDEO_MIX_TYPE_PROGRAM -MonitorIndex 1
+#If studio mode is enabled, make sure command above has PROGRAM (replace PREVIEW).
+#If studio mode is disabled, make sure command above has PREVIEW (replace PROGRAM).
+#Monitor number may need to be changed.
+
+
+# Disconnect from OBS Studio
+Disconnect-OBS
+
+
+Disconnect-OBS
