@@ -1,3 +1,4 @@
+# Intro:
 This is a simple app built for OBS to use powershell to manually
 set Media Source files that are on the computer. It is 
 specifically designed to give an option for the user to list hymns
@@ -11,11 +12,13 @@ This has the use case of wanting to play the hymns video on a
 projector that may be in the hall, and needs the video on it.
 
 
-The instructions for setup are as follows:
+# Prerequisites:
+The prerequisites for this tool to work are as follows:
 You must have OBS v.28 or above for this to work OR OBS-WebSocket v.5 
 or above.
 
-You need to have powershell 7 installed. [Install From Microsoft Here] (https://github.com/PowerShell/PowerShell/releases/download/v7.3.4/PowerShell-7.3.4-win-x64.msi)
+The OBS Websocket server should be (A) enabled and (B) have a server password of:
+iforgot
 
 It should be noted that this is requiring the format of the MP4 files 
 to be in numerical value only, no other words or dashes or anything
@@ -26,31 +29,22 @@ song2File
 song3File
 song4File
 song5File
+sermonetteFile
+sermonFile
 
-You must have the numeric version of the Hymnal MP4 files.
+The following 3 folders should exist on the desktop:
+1. Hymns
+2. Sermonettes
+3. Sermons
 
-To set this up as an executable file do the following:
+You must have the numeric version of the Hymnal MP4 files (in the Hymns folder on the desktop)
 
-Step 1. Install the OBS Song Loader PS1 file and move it to a place 
-you will remember in your files.
 
-Step 2. On your desktop, right click and create a new shortcut and 
-then copy and paste the following command into the 
-"Location of the item" INCLUDING THE QUOTATION MARKS.
+# Setup:
+1. Go to the version 2 release and download the .ps1 and the .cmd file
+2. Put the .ps1 file at the root of the C drive
+3. Put the .cmd file on the desktop
 
-"C:\Program Files\PowerShell\7\pwsh.exe" -ExecutionPolicy Bypass -File "C:\OBS.Song.Loader.ps1"
 
-Step 3. You shouldn't have to change this at all if you put the
-PS1 file you downloaded earlier in the base C Drive. BUT if 
-you put it somewhere else, replace the second filepath 
-(between the second set of quotation marks) with where you have 
-it saved.
-
-Step 3a. You shouldn't have to do this either, but if for some 
-reason you downloaded powershell 7 to a different spot, or if 
-your main hard drive is something other than "C:", you will 
-need to replace the first filepath (the first set of quotation 
-marks) with the Powershell 7 "pwsh.exe" file. You should be 
-able to follow and find it by following the filepath (i.e. 
-Going to program files, then to Powershell, then to 7, then 
-find the "pwsh.exe" file)
+# Usage
+After setup, you can double click the cmd file on the desktop and it will run the tool.
